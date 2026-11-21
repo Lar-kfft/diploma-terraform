@@ -7,9 +7,10 @@ terraform {
 }
 
 provider "yandex" {
-  cloud_id  = "b1gmrl0s8ovg8e9idolg"
-  folder_id = "b1gm3kk8lsfs8nbujfel"
-  zone      = "ru-central1-a"
+  cloud_id                 = "b1gmrl0s8ovg8e9idolg"
+  folder_id                = "b1gm3kk8lsfs8nbujfel"
+  zone                     = "ru-central1-a"
+  service_account_key_file = var.yc_sa_key_file
 }
 
 resource "yandex_vpc_network" "main" {
@@ -116,4 +117,10 @@ variable "ssh_public_key" {
   description = "Public SSH key for ubuntu user"
   type        = string
   default     = ""
+}
+
+variable "yc_sa_key_file" {
+  description = "Path to Yandex Cloud service account key JSON"
+  type        = string
+  default     = "~/.yandex/terraform-sa-key.json"
 }
